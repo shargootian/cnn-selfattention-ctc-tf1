@@ -1,5 +1,6 @@
 import os
 import tensorflow as tf
+from cfg.args import parse_args
 from libs.network import Network
 from cfg.config import Config as C
 
@@ -15,9 +16,11 @@ class crnn(Network):
         self.nclass = len(self.chars_dict) + 1
 
     def train(self):
-        pred = self._crnn(self.input_images, C, self.nclass)
+        pred = self._crnn(self.input_images, self.trainable)
 
 
 if __name__ == '__main__':
-    C = crnn
+    args = parse_args()
+    C = crnn(args)
+    C.train()
 

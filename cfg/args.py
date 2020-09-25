@@ -3,8 +3,11 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser(description='FACE_DETECTION')
 
+    parser.add_argument('--char_txt_path', dest='char_path', help="char location",
+                        default='./cfg/words.txt', type=str)
+
     parser.add_argument('--train_data_path', dest='train_data', help="train dataset lpcation",
-                        default='../../crnn_dataset/', type=str)
+                        default='../crnn_dataset/', type=str)
 
     parser.add_argument('--logs', dest='logs', help="events logs files saveing path",
                         default='./logs/', type=str)

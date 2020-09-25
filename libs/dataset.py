@@ -7,7 +7,6 @@ class Dataset(object):
             lang_dict = d.readlines()
             for i in range(len(lang_dict)):
                 lang_dict[i] = lang_dict[i].rstrip()
-            # lang_dict = lang_dict[:] + ['卍']
         chars_dict = {char: i for i, char in enumerate(lang_dict)}
 
         return chars_dict

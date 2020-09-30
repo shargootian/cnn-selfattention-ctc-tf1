@@ -3,6 +3,8 @@ class Config(object):
 
     INPUT_H = 32
 
+    CELL_DIM = 1024
+
     LEARNING_RATE = 0.001
 
     STEPS_PER_DECAY = 200

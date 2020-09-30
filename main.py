@@ -16,11 +16,11 @@ class crnn(Network):
         self.nclass = len(self.chars_dict) + 1
 
     def train(self):
-        pred = self._crnn(self.input_images, self.trainable)
+        pred = self._crnn(self.input_images, self.trainable, C)
 
 
 if __name__ == '__main__':
     args = parse_args()
-    C = crnn(args)
-    C.train()
+    CRNN = crnn(args)
+    CRNN.train()
 

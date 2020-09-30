@@ -11,7 +11,7 @@ class Network(Dataset):
             self.input_images = tf.placeholder(tf.float32, shape=[None, C.INPUT_H, 800, 3], name='input_images')            # input images
             self.trainable = tf.placeholder(dtype=tf.bool, name='training')
 
-    def _crnn(self, input_data, trainable):
+    def _crnn(self, input_data, trainable, C):
         with tf.name_scope('cnn'):
             input_data = tools.convolutional(input_data, filters_shape=(3, 3, 3, 32), trainable=trainable,
                                              name='conv0', strides=(1, 2, 2, 1))                                                  # h//2, w//2
@@ -47,6 +47,16 @@ class Network(Dataset):
             input_data = tf.squeeze(input_data, [1], name='squeeze')
 
         with tf.name_scope('rnn'):
+            lstm_fw_cell = tf.contrib.rnn.BasicLSTMCell(C.CELL_DIM, forget_bias=1.0, state_is_tuple=True)
+            lstm_bw_cell = tf.contrib.rnn.BasicLSTMCell(C.CELL_DIM, forget_bias=1.0, state_is_tuple=True)
+            seq_length = tf.shape(input_data)[1]
+            outputs, _ = tf.nn.bidirectional_dynamic_rnn(cell_fw=lstm_fw_cell,
+                                                         cell_bw=lstm_bw_cell,
+                                                         inputs=input_data,
+                                                         dtype=tf.float32,
+                                                         time_major=True,
+                                                         sequence_length=seq_length)
+
 
             print(1)
 

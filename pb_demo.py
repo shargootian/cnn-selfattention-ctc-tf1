@@ -25,7 +25,7 @@ def image_demo(image, return_elements):
     w = w * C.IMAGE_SIZE_H // h
     if w < C.IMAGE_SIZE_W:
         img = cv.resize(img, (w, C.IMAGE_SIZE_H))
-        tail = np.zeros((32, C.IMAGE_SIZE_W - w, 3))
+        tail = np.zeros((C.IMAGE_SIZE_H, C.IMAGE_SIZE_W - w, 3))
         img = np.concatenate((img, tail), axis=1)
         mask_len = w // C.DOWN_SAMPLE
     else:
